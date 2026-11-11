@@ -149,6 +149,29 @@
       line-height: 1.35;
     }
 
+    .field-hint {
+      display: block;
+      margin: 0.15rem 0 0;
+      color: var(--ink-soft);
+      font-size: 0.82rem;
+      font-weight: 400;
+      line-height: 1.35;
+    }
+
+    .metric-hint {
+      margin: 0.15rem 0 0;
+      color: var(--ink-soft);
+      font-size: 0.82rem;
+      line-height: 1.35;
+    }
+
+    .years-question {
+      margin: 0 0 0.7rem;
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      line-height: 1.35;
+    }
+
     .field input {
       width: 100%;
       margin: 0;
@@ -419,7 +442,7 @@
       <p class="kicker">A free calculator</p>
       <h1>How long does your family last if your income stops?</h1>
       <hr class="rule">
-      <p class="lede">Plug in your real numbers to see how many months your family could cover the bills, and how big the gap is.</p>
+      <p class="lede">Plug in your real numbers to see how long your family's money would cover the bills, and what's still missing.</p>
     </header>
 
     <main>
@@ -428,19 +451,25 @@
         <form id="calc" action="#" method="get">
           <div class="grid">
             <div class="field">
-              <label for="expenses">Monthly household expenses ($)</label>
+              <label for="expenses">What your household spends a month ($)
+                <span class="field-hint">Rent, food, bills, everything.</span>
+              </label>
               <input id="expenses" name="expenses" type="number" inputmode="decimal" min="0" step="any" value="5000" autocomplete="off">
             </div>
             <div class="field">
-              <label for="otherIncome">Monthly income that continues without you ($)</label>
+              <label for="otherIncome">Money still coming in without your paycheck ($)
+                <span class="field-hint">Like a partner's job or Social Security. Put 0 if none.</span>
+              </label>
               <input id="otherIncome" name="otherIncome" type="number" inputmode="decimal" min="0" step="any" value="2000" autocomplete="off">
             </div>
             <div class="field">
-              <label for="savings">Savings you could use ($)</label>
+              <label for="savings">Savings your family could use ($)</label>
               <input id="savings" name="savings" type="number" inputmode="decimal" min="0" step="any" value="8000" autocomplete="off">
             </div>
             <div class="field">
-              <label for="coverage">Life insurance you already have ($)</label>
+              <label for="coverage">Life insurance you already have ($)
+                <span class="field-hint">Put 0 if none.</span>
+              </label>
               <input id="coverage" name="coverage" type="number" inputmode="decimal" min="0" step="any" value="0" autocomplete="off">
             </div>
           </div>
@@ -452,39 +481,42 @@
         <div class="metrics">
           <div class="metric metric-hero is-warning" id="runway-metric">
             <p class="metric-value" id="runway">2.7 months</p>
-            <p class="metric-label">How long your family lasts</p>
+            <p class="metric-label">How long your family's money would cover the bills</p>
           </div>
           <div class="metrics-row">
             <div class="metric">
               <p class="metric-value" id="shortfall">$3,000</p>
-              <p class="metric-label">Monthly shortfall</p>
+              <p class="metric-label">What's missing each month</p>
+              <p class="metric-hint">Your bills minus the money still coming in</p>
             </div>
             <div class="metric">
               <p class="metric-value" id="available">$8,000</p>
-              <p class="metric-label">Money available</p>
+              <p class="metric-label">What your family would have</p>
+              <p class="metric-hint">Savings plus life insurance</p>
             </div>
           </div>
         </div>
         <div id="chart-wrap"></div>
-        <p id="no-shortfall" hidden>Your continuing income covers your expenses, so there is no monthly shortfall to fill.</p>
+        <p id="no-shortfall" hidden>The money still coming in covers the bills, so there's nothing missing each month.</p>
       </section>
 
       <section aria-labelledby="gap-heading">
         <h2 id="gap-heading">Cover the gap</h2>
-        <div class="segmented" role="radiogroup" aria-label="Years of expenses to protect">
+        <p class="years-question" id="years-question">How many years do you wanna protect your family for?</p>
+        <div class="segmented" role="radiogroup" aria-labelledby="years-question">
           <button type="button" data-years="5" aria-pressed="false">5</button>
           <button type="button" data-years="10" aria-pressed="true">10</button>
           <button type="button" data-years="15" aria-pressed="false">15</button>
           <button type="button" data-years="20" aria-pressed="false">20</button>
         </div>
         <dl class="properties">
-          <dt>Years of expenses to protect</dt>
+          <dt>Years you picked</dt>
           <dd id="years-value">10 years</dd>
-          <dt>Total the family would need</dt>
+          <dt>What they'd need</dt>
           <dd id="total-needed">$360,000</dd>
-          <dt>Already covered</dt>
+          <dt>What they already have</dt>
           <dd id="already-covered">$8,000</dd>
-          <dt class="gap-row">Coverage gap</dt>
+          <dt class="gap-row">What's still missing</dt>
           <dd class="gap-row" id="gap">$352,000</dd>
         </dl>
       </section>
@@ -494,7 +526,7 @@
         <ol class="steps">
           <li>
             <h3>Screenshot your result</h3>
-            <p>Your runway and your gap are the two numbers that matter.</p>
+            <p>How long the money lasts and what's still missing are the two numbers that matter.</p>
           </li>
           <li>
             <h3>Message me on Instagram with the word CHECK</h3>
@@ -510,7 +542,7 @@
           <span>Just send the word CHECK</span>
         </a>
         <aside class="disclaimer">
-          <p>This calculator gives a rough estimate for education only. It is not personal financial or insurance advice, and it ignores things like inflation, taxes, debts, and childcare costs. Nothing you enter here is saved or sent anywhere.</p>
+          <p>This calculator gives a rough estimate, just to help you learn. It's not personal financial or insurance advice, and it doesn't count things like inflation, taxes, debts, or childcare costs. Nothing you enter here is saved or sent anywhere.</p>
         </aside>
       </section>
     </main>
