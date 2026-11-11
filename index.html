@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>How long does your family last if your income stops?</title>
+  <meta name="description" content="Plug in your real numbers to see how many months your family could cover the bills, and how big the gap is. A free calculator — nothing you enter is saved or sent anywhere.">
+  <meta name="theme-color" content="#F5EDE0">
+  <meta name="robots" content="index,follow">
+  <meta property="og:title" content="How long does your family last if your income stops?">
+  <meta property="og:description" content="Plug in your real numbers to see how many months your family could cover the bills, and how big the gap is.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="How long does your family last if your income stops?">
+  <meta name="twitter:description" content="Plug in your real numbers to see how many months your family could cover the bills, and how big the gap is.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230B1A2E'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23E8B04A'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0B1A2E;
+      --ink-soft: #3D4B5C;
+      --cream: #F5EDE0;
+      --cream-deep: #E8DCC8;
+      --gold: #E8B04A;
+      --gold-deep: #C4922E;
+      --bronze: #6B4F12;
+      --warn: #8B5A12;
+      --warn-wash: rgba(232, 176, 74, 0.22);
+      --line: rgba(11, 26, 46, 0.12);
+      --line-strong: rgba(11, 26, 46, 0.22);
+      --font: "Newsreader", Georgia, "Times New Roman", serif;
+      --space: 1.35rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font);
+      font-optical-sizing: auto;
+      font-size: 1.0625rem;
+      font-weight: 400;
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+
+    ::selection {
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    a {
+      color: var(--ink);
+      text-decoration-color: var(--gold);
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 0.18em;
+    }
+
+    a:hover { color: var(--bronze); }
+
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    .page {
+      width: min(36rem, 100%);
+      margin: 0 auto;
+      padding: 2rem var(--space) 3.5rem;
+      padding-left: max(var(--space), env(safe-area-inset-left));
+      padding-right: max(var(--space), env(safe-area-inset-right));
+      padding-bottom: max(3.5rem, env(safe-area-inset-bottom));
+    }
+
+    header { padding-bottom: 0.4rem; }
+
+    .kicker {
+      margin: 0 0 0.85rem;
+      color: var(--bronze);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.85rem, 7.2vw, 2.35rem);
+      font-weight: 600;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+    }
+
+    .rule {
+      display: block;
+      width: 3rem;
+      height: 2px;
+      margin: 1.15rem 0 1.05rem;
+      background: var(--gold);
+      border: 0;
+    }
+
+    .lede {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 1.125rem;
+      line-height: 1.5;
+    }
+
+    section {
+      padding: 1.75rem 0 0.25rem;
+      border-top: 1px solid var(--line);
+      margin-top: 1.6rem;
+    }
+
+    h2 {
+      margin: 0 0 1.15rem;
+      font-size: 1.28rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.3;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.15rem 1.35rem;
+    }
+
+    @media (min-width: 520px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .field { display: flex; flex-direction: column; gap: 0.35rem; }
+
+    .field label {
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      line-height: 1.35;
+    }
+
+    .field input {
+      width: 100%;
+      margin: 0;
+      padding: 0.45rem 0 0.5rem;
+      border: 0;
+      border-bottom: 1.5px solid var(--line-strong);
+      border-radius: 0;
+      background: transparent;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 1.25rem;
+      font-weight: 500;
+      font-variant-numeric: lining-nums tabular-nums;
+      line-height: 1.3;
+      -webkit-appearance: none;
+      appearance: textfield;
+    }
+
+    .field input::-webkit-outer-spin-button,
+    .field input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .field input:hover { border-bottom-color: var(--ink); }
+
+    .field input:focus {
+      outline: none;
+      border-bottom-color: var(--gold);
+      box-shadow: 0 1px 0 var(--gold);
+    }
+
+    .metrics { display: flex; flex-direction: column; gap: 1rem; }
+
+    .metric { min-width: 0; }
+
+    .metric-hero {
+      padding: 1rem 1.05rem 0.95rem;
+      border-radius: 10px;
+      background: rgba(11, 26, 46, 0.04);
+    }
+
+    .metric-hero.is-warning {
+      background: var(--warn-wash);
+    }
+
+    .metric-value {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 600;
+      font-variant-numeric: lining-nums tabular-nums;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .metric-hero .metric-value { font-size: 2.15rem; }
+
+    .metric-hero.is-warning .metric-value { color: var(--warn); }
+
+    .metric-label {
+      margin: 0.28rem 0 0;
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+
+    .metrics-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 1.25rem;
+      padding: 0.15rem 1.05rem 0;
+    }
+
+    #chart-wrap { margin-top: 1.35rem; }
+
+    #chart-wrap svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    #no-shortfall {
+      margin: 0.35rem 0 0;
+      color: var(--ink-soft);
+    }
+
+    .segmented {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.3rem;
+      margin: 0 0 1.35rem;
+      padding: 0.28rem;
+      border-radius: 10px;
+      background: var(--cream-deep);
+    }
+
+    .segmented button {
+      margin: 0;
+      padding: 0.55rem 0.25rem;
+      border: 0;
+      border-radius: 7px;
+      background: transparent;
+      color: var(--ink-soft);
+      font-family: inherit;
+      font-size: 1.0625rem;
+      font-weight: 500;
+      font-variant-numeric: lining-nums tabular-nums;
+      line-height: 1.2;
+      cursor: pointer;
+    }
+
+    .segmented button:hover { color: var(--ink); }
+
+    .segmented button[aria-pressed="true"] {
+      background: var(--ink);
+      color: var(--cream);
+      font-weight: 600;
+    }
+
+    .segmented button:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    .properties {
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.7rem 1rem;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+
+    .properties dt {
+      margin: 0;
+      color: var(--ink-soft);
+    }
+
+    .properties dd {
+      margin: 0;
+      text-align: right;
+      font-weight: 500;
+    }
+
+    .properties dt.gap-row,
+    .properties dd.gap-row {
+      font-weight: 600;
+      color: var(--ink);
+      padding-top: 0.7rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .properties dt.gap-row { margin-right: -0.5rem; padding-right: 0.5rem; }
+    .properties dd.gap-row { margin-left: -0.5rem; padding-left: 0.5rem; }
+
+    .steps {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: step;
+    }
+
+    .steps li {
+      display: grid;
+      grid-template-columns: 1.85rem 1fr;
+      column-gap: 0.7rem;
+      margin: 0 0 1.15rem;
+      counter-increment: step;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      width: 1.85rem;
+      height: 1.85rem;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--ink);
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-variant-numeric: lining-nums tabular-nums;
+      line-height: 1.85rem;
+      text-align: center;
+    }
+
+    .steps h3 {
+      margin: 0.15rem 0 0.2rem;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .steps p {
+      margin: 0;
+      color: var(--ink-soft);
+      grid-column: 2;
+    }
+
+    .cta {
+      display: block;
+      margin: 1.35rem 0 0;
+      padding: 0.9rem 1.1rem;
+      border-radius: 10px;
+      background: var(--ink);
+      color: var(--cream);
+      text-align: center;
+      text-decoration: none;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .cta:hover {
+      color: var(--cream);
+      background: #16263d;
+    }
+
+    .cta:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    .cta span {
+      display: block;
+      margin-top: 0.15rem;
+      color: var(--gold);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .disclaimer {
+      margin: 1.5rem 0 0;
+      padding: 0.95rem 1.05rem;
+      border-left: 3px solid var(--gold);
+      background: rgba(11, 26, 46, 0.04);
+      color: var(--ink-soft);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .disclaimer p { margin: 0; }
+
+    footer {
+      margin-top: 2.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    footer a:hover {
+      color: var(--ink);
+      text-decoration: underline;
+      text-decoration-color: var(--gold);
+    }
+
+    @media (min-width: 600px) {
+      .page { padding-top: 2.75rem; }
+      .metric-hero .metric-value { font-size: 2.35rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <p class="kicker">A free calculator</p>
+      <h1>How long does your family last if your income stops?</h1>
+      <hr class="rule">
+      <p class="lede">Plug in your real numbers to see how many months your family could cover the bills, and how big the gap is.</p>
+    </header>
+
+    <main>
+      <section aria-labelledby="numbers-heading">
+        <h2 id="numbers-heading">Your numbers</h2>
+        <form id="calc" action="#" method="get">
+          <div class="grid">
+            <div class="field">
+              <label for="expenses">Monthly household expenses ($)</label>
+              <input id="expenses" name="expenses" type="number" inputmode="decimal" min="0" step="any" value="5000" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="otherIncome">Monthly income that continues without you ($)</label>
+              <input id="otherIncome" name="otherIncome" type="number" inputmode="decimal" min="0" step="any" value="2000" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="savings">Savings you could use ($)</label>
+              <input id="savings" name="savings" type="number" inputmode="decimal" min="0" step="any" value="8000" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="coverage">Life insurance you already have ($)</label>
+              <input id="coverage" name="coverage" type="number" inputmode="decimal" min="0" step="any" value="0" autocomplete="off">
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <section aria-labelledby="result-heading">
+        <h2 id="result-heading">Your result</h2>
+        <div class="metrics">
+          <div class="metric metric-hero is-warning" id="runway-metric">
+            <p class="metric-value" id="runway">2.7 months</p>
+            <p class="metric-label">How long your family lasts</p>
+          </div>
+          <div class="metrics-row">
+            <div class="metric">
+              <p class="metric-value" id="shortfall">$3,000</p>
+              <p class="metric-label">Monthly shortfall</p>
+            </div>
+            <div class="metric">
+              <p class="metric-value" id="available">$8,000</p>
+              <p class="metric-label">Money available</p>
+            </div>
+          </div>
+        </div>
+        <div id="chart-wrap"></div>
+        <p id="no-shortfall" hidden>Your continuing income covers your expenses, so there is no monthly shortfall to fill.</p>
+      </section>
+
+      <section aria-labelledby="gap-heading">
+        <h2 id="gap-heading">Cover the gap</h2>
+        <div class="segmented" role="radiogroup" aria-label="Years of expenses to protect">
+          <button type="button" data-years="5" aria-pressed="false">5</button>
+          <button type="button" data-years="10" aria-pressed="true">10</button>
+          <button type="button" data-years="15" aria-pressed="false">15</button>
+          <button type="button" data-years="20" aria-pressed="false">20</button>
+        </div>
+        <dl class="properties">
+          <dt>Years of expenses to protect</dt>
+          <dd id="years-value">10 years</dd>
+          <dt>Total the family would need</dt>
+          <dd id="total-needed">$360,000</dd>
+          <dt>Already covered</dt>
+          <dd id="already-covered">$8,000</dd>
+          <dt class="gap-row">Coverage gap</dt>
+          <dd class="gap-row" id="gap">$352,000</dd>
+        </dl>
+      </section>
+
+      <section aria-labelledby="next-heading">
+        <h2 id="next-heading">Next step: a free coverage check</h2>
+        <ol class="steps">
+          <li>
+            <h3>Screenshot your result</h3>
+            <p>Your runway and your gap are the two numbers that matter.</p>
+          </li>
+          <li>
+            <h3>Message me on Instagram with the word CHECK</h3>
+            <p>We go over the numbers together, straight talk, no pressure.</p>
+          </li>
+          <li>
+            <h3>Decide for yourself</h3>
+            <p>You'll see what coverage fits your budget, or that you may not need more.</p>
+          </li>
+        </ol>
+        <a class="cta" href="https://instagram.com/presentmomentsam" rel="noopener noreferrer">
+          Message me on Instagram
+          <span>Just send the word CHECK</span>
+        </a>
+        <aside class="disclaimer">
+          <p>This calculator gives a rough estimate for education only. It is not personal financial or insurance advice, and it ignores things like inflation, taxes, debts, and childcare costs. Nothing you enter here is saved or sent anywhere.</p>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <p><a href="https://instagram.com/presentmomentsam" rel="noopener noreferrer">@presentmomentsam</a></p>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      function money(n) {
+        return "$" + Math.round(n).toLocaleString("en-US");
+      }
+
+      function num(v) {
+        const n = Number(v);
+        return isFinite(n) && n > 0 ? n : 0;
+      }
+
+      function runwayText(months) {
+        if (!isFinite(months)) return "No gap";
+        if (months < 1) return "Under 1 month";
+        if (months < 24) return months.toFixed(1) + " months";
+        return (months / 12).toFixed(1) + " years";
+      }
+
+      const form = document.getElementById("calc");
+      const expenses = document.getElementById("expenses");
+      const otherIncome = document.getElementById("otherIncome");
+      const savings = document.getElementById("savings");
+      const coverage = document.getElementById("coverage");
+      const runwayEl = document.getElementById("runway");
+      const runwayMetric = document.getElementById("runway-metric");
+      const shortfallEl = document.getElementById("shortfall");
+      const availableEl = document.getElementById("available");
+      const chartWrap = document.getElementById("chart-wrap");
+      const noShortfall = document.getElementById("no-shortfall");
+      const yearsValue = document.getElementById("years-value");
+      const totalNeededEl = document.getElementById("total-needed");
+      const alreadyCoveredEl = document.getElementById("already-covered");
+      const gapEl = document.getElementById("gap");
+      const yearButtons = Array.from(document.querySelectorAll(".segmented button"));
+
+      let years = "10";
+
+      function chartSvg(resources, shortfall) {
+        const points = [];
+        for (let m = 0; m <= 36; m += 3) {
+          const label = m === 0 ? "Now" : m === 12 ? "1 yr" : m === 24 ? "2 yr" : m === 36 ? "3 yr" : "";
+          points.push({ m: m, label: label, value: Math.max(0, resources - shortfall * m) });
+        }
+        const ceiling = Math.max(resources, 1);
+        const W = 360;
+        const H = 200;
+        const pad = { l: 62, r: 10, t: 14, b: 30 };
+        const plotW = W - pad.l - pad.r;
+        const plotH = H - pad.t - pad.b;
+        const xOf = function (m) { return pad.l + (m / 36) * plotW; };
+        const yOf = function (v) { return pad.t + (1 - v / ceiling) * plotH; };
+
+        const coords = points.map(function (p) {
+          return { x: xOf(p.m), y: yOf(p.value), label: p.label, value: p.value };
+        });
+
+        const line = coords.map(function (p, i) {
+          return (i === 0 ? "M" : "L") + p.x.toFixed(1) + " " + p.y.toFixed(1);
+        }).join(" ");
+
+        const last = coords[coords.length - 1];
+        const first = coords[0];
+        const area = line
+          + " L" + last.x.toFixed(1) + " " + yOf(0).toFixed(1)
+          + " L" + first.x.toFixed(1) + " " + yOf(0).toFixed(1)
+          + " Z";
+
+        const yTicks = [ceiling, 0].map(function (v) {
+          const y = yOf(v);
+          return '<line x1="' + pad.l + '" y1="' + y.toFixed(1) + '" x2="' + (W - pad.r) + '" y2="' + y.toFixed(1) + '" stroke="rgba(11,26,46,0.14)" stroke-width="1"/>'
+            + '<text x="' + (pad.l - 8) + '" y="' + (y + 3.5).toFixed(1) + '" text-anchor="end" fill="#3D4B5C" font-size="10" font-family="Newsreader, Georgia, serif">' + money(v) + "</text>";
+        }).join("");
+
+        const xLabels = coords.filter(function (p) { return p.label; }).map(function (p) {
+          return '<text x="' + p.x.toFixed(1) + '" y="' + (H - 8) + '" text-anchor="middle" fill="#3D4B5C" font-size="11" font-family="Newsreader, Georgia, serif">' + p.label + "</text>";
+        }).join("");
+
+        const dots = coords.filter(function (p) { return p.label; }).map(function (p, i) {
+          const fill = i === 0 ? "#E8B04A" : "#0B1A2E";
+          return '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="3.2" fill="' + fill + '" />';
+        }).join("");
+
+        return '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-labelledby="chart-title" xmlns="http://www.w3.org/2000/svg">'
+          + '<title id="chart-title">Money remaining over the next 36 months</title>'
+          + yTicks
+          + '<path d="' + area + '" fill="rgba(232,176,74,0.22)"/>'
+          + '<path d="' + line + '" fill="none" stroke="#0B1A2E" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>'
+          + dots
+          + xLabels
+          + "</svg>";
+      }
+
+      function render() {
+        const need = num(expenses.value);
+        const other = num(otherIncome.value);
+        const resources = num(savings.value) + num(coverage.value);
+        const shortfall = Math.max(0, need - other);
+        const months = shortfall > 0 ? resources / shortfall : Infinity;
+        const target = Number(years);
+        const totalNeeded = shortfall * 12 * target;
+        const gap = Math.max(0, totalNeeded - resources);
+
+        runwayEl.textContent = runwayText(months);
+        runwayMetric.classList.toggle("is-warning", isFinite(months) && months < 12);
+        shortfallEl.textContent = money(shortfall);
+        availableEl.textContent = money(resources);
+
+        if (shortfall > 0) {
+          noShortfall.hidden = true;
+          chartWrap.hidden = false;
+          chartWrap.innerHTML = chartSvg(resources, shortfall);
+        } else {
+          chartWrap.hidden = true;
+          chartWrap.innerHTML = "";
+          noShortfall.hidden = false;
+        }
+
+        yearsValue.textContent = years + " years";
+        totalNeededEl.textContent = money(totalNeeded);
+        alreadyCoveredEl.textContent = money(Math.min(resources, totalNeeded));
+        gapEl.textContent = money(gap);
+      }
+
+      form.addEventListener("submit", function (e) { e.preventDefault(); });
+      [expenses, otherIncome, savings, coverage].forEach(function (input) {
+        input.addEventListener("input", render);
+      });
+
+      yearButtons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          years = btn.getAttribute("data-years");
+          yearButtons.forEach(function (b) {
+            b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+          });
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
